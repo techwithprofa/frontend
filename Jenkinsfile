@@ -7,11 +7,17 @@ pipeline {
     }
 
     stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
       
 
         stage('Build') {
             steps {
-                sh 'sudo npm install'
+                sh 'npm install'
                 sh 'npm run build'
             }
         }
