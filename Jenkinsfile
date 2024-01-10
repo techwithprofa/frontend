@@ -2,7 +2,7 @@ pipeline {
     agent any  // Run on any available agent
 
     environment {
-        R = 'echwithproga/frontend'
+        R = 'techwithproga/frontend'
         Rc = 'dockerhub'
     }
 
