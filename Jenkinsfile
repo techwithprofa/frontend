@@ -24,6 +24,8 @@ pipeline {
 
         stage('Test') {
             steps {
+                sh '"Current directory: $(pwd)"'
+                sh 'ls -la'
                 sh 'npm test'
             }
         }
