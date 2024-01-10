@@ -1,5 +1,5 @@
 pipeline {
-    agent any  // Run on any available agent
+    agent any
 
     environment {
         R = 'techwithproga/frontend'
@@ -13,7 +13,6 @@ pipeline {
                 checkout scm
             }
         }
-      
 
         stage('Build') {
             steps {
@@ -22,32 +21,28 @@ pipeline {
             }
         }
 
-
         stage('Bulid Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build R + ".v$BUILD_NUMBER"
-
+                    dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
                 }
             }
         }
 
-        stage('Uplode Image') {
+        stage('Upload Image') {
             steps {
                 script {
                     docker.withRegistry('' , Rc){
-                        dockerImage.push("v$BUILD_NUMBER")
+                        dockerImage.push("v${BUILD_NUMBER}")
                         dockerImage.push("latest")
-
                     }
-
                 }
             }
         }
+
         stage('Remove old Image') {
             steps {
-                sh "docker rmi $r:v$BUILD_NUMBER"
-             
+                sh "docker rmi ${R}:v${BUILD_NUMBER}"
             }
         }
     }
