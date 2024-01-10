@@ -26,7 +26,7 @@ pipeline {
         stage('Bulid Docker Image') {
             steps {
                 script {
-                    dockerImage = docker.build R + ".v$BUILD_NUMBR"
+                    dockerImage = docker.build R + ".v$BUILD_NUMBER"
 
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('' , Rc){
-                        dockerImage.push("v$BUILD_NUMBR")
+                        dockerImage.push("v$BUILD_NUMBER")
                         dockerImage.push("latest")
 
                     }
@@ -46,7 +46,7 @@ pipeline {
         }
         stage('Remove old Image') {
             steps {
-                sh "docker rmi $r:v$BUILD_NUMBR"
+                sh "docker rmi $r:v$BUILD_NUMBER"
              
             }
         }
