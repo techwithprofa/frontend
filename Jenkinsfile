@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         nodejs  'nodejs'
+        docker 'docker'
         
     }
 
@@ -35,10 +36,10 @@ pipeline {
 
         stage('Bulid Docker Image') {
             steps {
-                 script {
-                  
-                  dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
-                }
+               
+                dockerImage = docker.build image: "${R}:v${BUILD_NUMBER}", context: '.', env: ['MY_ENV_VAR="my_value"']  // Build image with env var (optional)
+            
+
             }
         }
 
