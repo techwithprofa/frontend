@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         nodejs  'nodejs'
-        dockerTool 'docker'
+        
         
     }
 
@@ -37,7 +37,7 @@ pipeline {
         stage('Build Docker Image') {
              steps {
                  script {
-                    dockerImage = docker.build(image: "<span class="math-inline">\{R\}\:v</span>{BUILD_NUMBER}", context: '.')
+                    dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
 
                 }
 
