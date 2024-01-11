@@ -1,14 +1,16 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs  'nodejs'
+    }
+
     environment {
         R = 'techwithproga/frontend'
         Rc = 'dockerhub'
+        PATH = "${tool 'nodejs'}/bin:${env.PATH}"
     }
-    environmentMap {
-       'PATH' = "/usr/local/bin/node:$PATH"
-    }
-
+ 
     stages {
 
         stage('Checkout') {
@@ -19,7 +21,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                env.PATH = "/usr/local/bin/node:$PATH"
+                
                 sh 'npm run build'
             }
         }
