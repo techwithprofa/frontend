@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         nodejs  'nodejs'
-        docker 'docker'
+        dockerTool 'docker'
         
     }
 
@@ -38,8 +38,6 @@ pipeline {
             steps {
                
                 dockerImage = docker.build image: "${R}:v${BUILD_NUMBER}", context: '.', env: ['MY_ENV_VAR="my_value"']  // Build image with env var (optional)
-            
-
             }
         }
 
