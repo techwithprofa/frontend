@@ -35,7 +35,7 @@ pipeline {
         stage('Bulid Docker Image') {
             steps {
                 script {
-                    echo sudo service docker status
+                    
                     dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
                 }
             }
