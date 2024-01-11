@@ -16,7 +16,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'npm install'
+             
                 sh 'npm run build'
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('Bulid Docker Image') {
             steps {
                 script {
-                    echo "sudo service docker status"
+                    echo sudo service docker status
                     dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
                 }
             }
