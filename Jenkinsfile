@@ -34,11 +34,10 @@ pipeline {
             }
         }
 
-        stage('Bulid Docker Image') {
-            steps {
-               
-                dockerImage = docker.build image: "${R}:v${BUILD_NUMBER}", context: '.', env: ['MY_ENV_VAR="my_value"']  // Build image with env var (optional)
-            }
+        stage('Build Docker Image') {
+             steps {
+        dockerImage = docker.build(image: "${R}:v${BUILD_NUMBER}", context: '.', env: ['MY_ENV_VAR="my_value"'])
+             }
         }
 
         stage('Upload Image') {
