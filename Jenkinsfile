@@ -36,9 +36,14 @@ pipeline {
 
         stage('Build Docker Image') {
              steps {
-        dockerImage = docker.build(image: "${R}:v${BUILD_NUMBER}", context: '.', env: ['MY_ENV_VAR="my_value"'])
+                 script {
+                 dockerImage = docker.build(image: "${R}:v${BUILD_NUMBER}", context: '.', env: ['MY_ENV_VAR="my_value"'])
+                }
+
              }
         }
+
+        
 
         stage('Upload Image') {
             steps {
