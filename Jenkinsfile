@@ -5,6 +5,9 @@ pipeline {
         R = 'techwithproga/frontend'
         Rc = 'dockerhub'
     }
+    environmentMap {
+       'PATH' = "/usr/local/bin/node:$PATH"
+    }
 
     stages {
 
@@ -16,7 +19,7 @@ pipeline {
 
         stage('Build') {
             steps {
-             
+                env.PATH = "/usr/local/bin/node:$PATH"
                 sh 'npm run build'
             }
         }
