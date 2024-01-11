@@ -37,7 +37,8 @@ pipeline {
         stage('Build Docker Image') {
              steps {
                  script {
-                     docker.image("${R}:v${BUILD_NUMBER}").build('.')
+                    dockerImage = docker.build(image: "<span class="math-inline">\{R\}\:v</span>{BUILD_NUMBER}", context: '.')
+
                 }
 
              }
