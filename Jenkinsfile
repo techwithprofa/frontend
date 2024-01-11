@@ -3,6 +3,7 @@ pipeline {
 
     tools {
         nodejs  'nodejs'
+        
     }
 
     environment {
@@ -34,9 +35,10 @@ pipeline {
 
         stage('Bulid Docker Image') {
             steps {
-                script {
-                    
-                    dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
+                 script {
+                  echo 'Checking Docker status:'
+                  sh 'which docker'
+                  dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
                 }
             }
         }
