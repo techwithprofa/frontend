@@ -12,7 +12,7 @@ pipeline {
         PATH = "${tool 'nodejs'}/bin:${env.PATH}"
     }
 
-    // stages {
+    stages {
     //     stage('Checkout') {
     //         steps {
     //             checkout scm
@@ -38,6 +38,7 @@ pipeline {
                 }
             }
         }
+
        stage('Push image') {
 
         steps {
@@ -57,4 +58,5 @@ pipeline {
             }
         }
     }
+}
 
