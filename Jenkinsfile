@@ -2,11 +2,7 @@ pipeline {
     agent any
 
     tools {
-        nodejs  'nodejs'
-        dockerTool 'docker'
-        
-        
-        
+        nodejs 'nodejs'
     }
 
     environment {
@@ -14,16 +10,15 @@ pipeline {
         Rc = 'dockerhub'
         PATH = "${tool 'nodejs'}/bin:${env.PATH}"
     }
- 
-    stages {
 
+    stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-          stage('Install Dependencies') {
+        stage('Install Dependencies') {
             steps {
                 sh 'npm install'
             }
@@ -31,27 +26,23 @@ pipeline {
 
         stage('Build') {
             steps {
-                
                 sh 'npm run build'
             }
         }
 
         stage('Build Docker Image') {
-             steps {
-                 script {
+            steps {
+                script {
                     dockerImage = docker.build "${R}:v${BUILD_NUMBER}"
-
                 }
-
-             }
+            }
         }
-
-        
 
         stage('Upload Image') {
             steps {
                 script {
-                    docker.withRegistry('' , Rc){
+                    // Log in to Docker Hub and push images
+                    docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
                         dockerImage.push("v${BUILD_NUMBER}")
                         dockerImage.push("latest")
                     }
