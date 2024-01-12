@@ -51,6 +51,8 @@ pipeline {
                     dockerImage.push("latest")
                 }
             }
+                }
+            }
         }
 
         stage('Remove old Image') {
