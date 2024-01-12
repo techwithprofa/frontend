@@ -38,10 +38,16 @@ pipeline {
                 }
             }
         }
- stage('Push image') {
-    
-        withDockerRegistry([ credentialsId: "${Rc}", url: "" ]) {
+       stage('Push image') {
+
+        steps {
+                script {
+                     withDockerRegistry([ credentialsId: "${Rc}", url: "" ]) {
         dockerImage.push()
+                }
+            }
+
+       
         }
     }
 
