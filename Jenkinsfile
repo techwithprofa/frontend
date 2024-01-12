@@ -6,7 +6,7 @@ pipeline {
     }
 
     environment {
-        R = 'techwithproga'
+        R = 'techwithproga/frontend'
         Rc = 'dockerhub'
         PATH = "${tool 'nodejs'}/bin:${env.PATH}"
     }
