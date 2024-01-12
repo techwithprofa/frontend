@@ -43,7 +43,7 @@ pipeline {
 
         steps {
                 script {
-                     withDockerRegistry([ credentialsId: "${Rc}", url: "" ]) {
+                     docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
         dockerImage.push()
                 }
             }
