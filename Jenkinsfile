@@ -38,22 +38,11 @@ pipeline {
                 }
             }
         }
-
-        stage('Upload Image') {
-            steps {
-                script {
-            // Use Docker Hub credential for authentication
-            withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME', emailVariable: 'techwithprofa@gmail.com')]) {
-                // Log in to Docker Hub and push images
-                sh 'docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD https://index.docker.io/v1/'
-                docker.withRegistry('https://index.docker.io/v1/', 'dockerhub') {
-                    dockerImage.push("v${BUILD_NUMBER}")
-                    dockerImage.push("latest")
-                }
-            }
-                }
-            }
+ stage('Push image') {
+        withDockerRegistry([ credentialsId: "${Rc}", url: "" ]) {
+        dockerImage.push()
         }
+    }
 
         stage('Remove old Image') {
             steps {
